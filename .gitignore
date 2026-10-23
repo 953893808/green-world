@@ -30,3 +30,6 @@ Desktop.ini
 *.tar
 *.tar.gz
 offline/
+
+# 本地生成的验收截图（npm run mobile 产出）
+docs/screenshots/*.png
