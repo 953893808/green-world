@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "budgetKB": 1536,
+  "_note": "单一事实源：人改这里，然后 node scripts/gen-art.mjs 生成 src/ui/art-manifest.ts。键名由文件名自动派生（去掉分组前缀与两位序号后转小驼峰）。files 的每项格式：[文件名(不含 .webp), 宽, 高, tier?]，tier 缺省 lazy，只有 heroKeyart 是 preload。",
+  "groups": {
+    "brand": {
+      "dir": "brand",
+      "prefix": "brand-",
+      "files": [
+        ["brand-01-app-icon", 512, 512],
+        ["brand-02-hero-keyart", 768, 1024, "preload"],
+        ["brand-03-title-plate", 768, 256],
+        ["brand-04-mode-career", 480, 640],
+        ["brand-05-mode-manager", 480, 640],
+        ["brand-06-share-bg", 750, 1000],
+        ["brand-07-empty-state", 480, 360],
+        ["brand-08-loading-pitch", 750, 750],
+        ["brand-09-divider-lines", 750, 48],
+        ["brand-10-favicon", 64, 64]
+      ]
+    },
+    "confederation": {
+      "dir": "confederation",
+      "prefix": "confederation-",
+      "files": [
+        ["confederation-01-europe", 256, 256],
+        ["confederation-02-south-america", 256, 256],
+        ["confederation-03-asia", 256, 256],
+        ["confederation-04-africa", 256, 256],
+        ["confederation-05-north-america", 256, 256],
+        ["confederation-06-oceania", 256, 256]
+      ]
+    },
+    "scenery": {
+      "dir": "scenery",
+      "prefix": "scenery-",
+      "files": [
+        ["scenery-01-stadium-day", 640, 360],
+        ["scenery-02-stadium-night", 640, 360],
+        ["scenery-03-tunnel", 640, 360],
+        ["scenery-04-locker-room", 640, 360],
+        ["scenery-05-tactics-board", 640, 360],
+        ["scenery-06-press-room", 640, 360],
+        ["scenery-07-boardroom", 640, 360],
+        ["scenery-08-training-ground", 640, 360],
+        ["scenery-09-cold-away-room", 640, 360],
+        ["scenery-10-transfer-desk", 640, 360]
+      ]
+    },
+    "event": {
+      "dir": "event",
+      "prefix": "event-",
+      "files": [
+        ["event-c01-extra-training", 480, 320],
+        ["event-c02-coach-meeting", 480, 320],
+        ["event-c03-sponsor-deal", 480, 320],
+        ["event-c04-night-out", 480, 320],
+        ["event-c05-media-criticism", 480, 320],
+        ["event-c06-injury-scare", 480, 320],
+        ["event-c07-veteran-hazing", 480, 320],
+        ["event-c08-transfer-rumor", 480, 320],
+        ["event-c09-fans-gift", 480, 320],
+        ["event-c10-winter-camp", 480, 320],
+        ["event-c11-media-day", 480, 320],
+        ["event-c12-insomnia", 480, 320],
+        ["event-c13-captain-vote", 480, 320],
+        ["event-c14-award-snub", 480, 320],
+        ["event-m01-dressing-room-revolt", 480, 320],
+        ["event-m02-board-pressure", 480, 320],
+        ["event-m03-star-wants-out", 480, 320],
+        ["event-m04-academy-gem", 480, 320],
+        ["event-m05-referee-row", 480, 320],
+        ["event-m06-fan-protest", 480, 320],
+        ["event-m07-sponsor-pressure", 480, 320],
+        ["event-m08-staff-dispute", 480, 320],
+        ["event-m09-keeper-error", 480, 320],
+        ["event-m10-fixture-congestion", 480, 320],
+        ["event-m11-callup-clash", 480, 320],
+        ["event-m12-relegation-decider", 480, 320]
+      ]
+    },
+    "moment": {
+      "dir": "moment",
+      "prefix": "moment-",
+      "files": [
+        ["moment-01-late-corner", 640, 427],
+        ["moment-02-penalty-taker", 640, 427],
+        ["moment-03-injury-risk", 640, 427],
+        ["moment-04-time-wasting", 640, 427],
+        ["moment-05-red-card", 640, 427],
+        ["moment-06-promotion-decider", 640, 427],
+        ["moment-07-career-sub-self", 640, 427],
+        ["moment-08-final-whistle", 640, 427]
+      ]
+    },
+    "honor": {
+      "dir": "honor",
+      "prefix": "honor-",
+      "files": [
+        ["honor-01-league-title", 256, 256],
+        ["honor-02-domestic-cup", 256, 256],
+        ["honor-03-continental-top", 256, 256],
+        ["honor-04-continental-second", 256, 256],
+        ["honor-05-club-world", 256, 256],
+        ["honor-06-golden-boot", 256, 256],
+        ["honor-07-assist-crown", 256, 256],
+        ["honor-08-season-best", 256, 256],
+        ["honor-09-best-young", 256, 256],
+        ["honor-10-golden-ball", 256, 256],
+        ["honor-11-national-callup", 256, 256],
+        ["honor-12-hall-of-fame", 256, 256]
+      ]
+    },
+    "scenario": {
+      "dir": "scenario",
+      "prefix": "scenario-",
+      "files": [
+        ["scenario-01-great-escape", 640, 427],
+        ["scenario-02-underdog-champion", 640, 427],
+        ["scenario-03-financial-rebuild", 640, 427],
+        ["scenario-04-national-cycle", 640, 427]
+      ]
+    },
+    "pylon": {
+      "dir": "pylon",
+      "prefix": "pylon-",
+      "files": [
+        ["pylon-01-header-bg", 750, 180],
+        ["pylon-02-line-national", 750, 180],
+        ["pylon-03-line-club", 750, 180]
+      ]
+    },
+    "community": {
+      "dir": "community",
+      "prefix": "community-",
+      "files": [
+        ["community-01-avatar-1", 128, 128],
+        ["community-02-avatar-2", 128, 128],
+        ["community-03-avatar-3", 128, 128],
+        ["community-04-avatar-4", 128, 128],
+        ["community-05-avatar-5", 128, 128],
+        ["community-06-avatar-6", 128, 128],
+        ["community-07-avatar-7", 128, 128],
+        ["community-08-avatar-8", 128, 128],
+        ["community-09-mood-high", 480, 160],
+        ["community-10-mood-calm", 480, 160],
+        ["community-11-mood-angry", 480, 160],
+        ["community-12-press-mic", 480, 320]
+      ]
+    },
+    "end": {
+      "dir": "end",
+      "prefix": "end-",
+      "files": [
+        ["end-01-grade-s", 384, 384],
+        ["end-02-grade-a", 384, 384],
+        ["end-03-grade-b", 384, 384],
+        ["end-04-grade-c", 384, 384],
+        ["end-05-grade-d", 384, 384],
+        ["end-06-career-wall", 750, 420],
+        ["end-07-trophy-shelf", 640, 427],
+        ["end-08-share-frame", 750, 1000]
+      ]
+    },
+    "texture": {
+      "dir": "texture",
+      "prefix": "texture-",
+      "files": [
+        ["texture-01-paper-grain", 256, 256],
+        ["texture-02-pitch-stripes", 256, 256],
+        ["texture-03-halftone", 256, 256],
+        ["texture-04-contour", 256, 256],
+        ["texture-05-noise-dark", 256, 256],
+        ["texture-06-grid", 256, 256]
+      ]
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "green-world",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "生涯：绿茵世界 — 六大洲际联合会双金字塔足球生涯/经理模拟",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.20"
+  },
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "build": "npm run gen:art && npm run check:art -- --strict && tsc --noEmit && vite build",
+    "build:nogen": "npm run check:art && tsc --noEmit && vite build",
+    "gen:art": "node scripts/gen-art.mjs",
+    "gen:art:check": "node scripts/gen-art.mjs --check",
+    "check:art": "node scripts/check-art.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "smoke:static": "node scripts/smoke.mjs --static",
+    "build:single": "node scripts/build-singlefile.mjs",
+    "mobile": "node scripts/mobile-check.mjs",
+    "ci": "npm run typecheck && npm run gen:art:check && npm run check:art -- --strict && npm test && npm run build:nogen && npm run smoke:static && npm run build:single"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.5"
+  }
+}

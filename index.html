@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#14332A" />
+    <title>生涯：绿茵世界</title>
+    <!-- 空 favicon：浏览器默认会请求 /favicon.ico，dist 里没有这个文件 → 首屏必吃 404。
+         data: 内联一个空图标，连请求都不发。 -->
+    <link rel="icon" href="data:," />
+    <!-- 主视觉的 preload 由 main.ts 按 art-manifest 的落盘标记动态插入：
+         图还没做时不能静态写死，否则首屏必吃一个 404（冒烟会把 404 记成页面错误） -->
+
+    <!-- 预加载提示条：首屏在没有图片时也必须 1 秒内可交互 -->
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #14332a;
+        color: #f7f3ea;
+      }
+      #boot {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        font: 400 14px/1.6 system-ui, -apple-system, 'Segoe UI', 'Noto Sans SC', sans-serif;
+        letter-spacing: 0.08em;
+        color: #efe7d6;
+      }
+      #boot span {
+        opacity: 0.7;
+      }
+      /* 首屏 JS 接管后立刻移除，避免白屏闪 */
+      #app:not(:empty) + #boot,
+      #boot[hidden] {
+        display: none;
+      }
+    </style>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <!-- 修复：整页 role="application" 会让读屏器退出浏览模式；改成 main 语义 -->
+    <div id="app" class="app" role="main" aria-label="生涯：绿茵世界"></div>
+    <div id="boot"><span>正在铺草皮…</span></div>
+    <noscript>这个游戏需要开启 JavaScript。</noscript>
+  </body>
+</html>

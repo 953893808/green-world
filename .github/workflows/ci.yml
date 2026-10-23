@@ -1,0 +1,74 @@
+name: CI
+
+# 这个仓库此前没有任何自动化门禁：README 里的「192 项单测 / 98 项冒烟 / 35 项手机端」
+# 全靠手工跑。这份 workflow 把能在无头环境复现的部分全部固化下来；
+# 需要真浏览器的手机端截图（npm run mobile）只做「尽力而为」，跳过时显式告警、绝不假绿。
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: 安装依赖（零运行时依赖，只有 3 个 devDependencies）
+        run: npm ci
+
+      - name: 类型检查（strict + noUncheckedIndexedAccess）
+        run: npm run typecheck
+
+      - name: 生成物漂移检查（art-manifest.ts 是否与 assets/art-manifest.json 同步）
+        run: npm run gen:art:check
+
+      - name: 美术验收（105 张 × 真实像素尺寸 × 体积预算）
+        run: npm run check:art -- --strict
+
+      - name: 单元测试
+        run: npm test
+
+      - name: 构建（gen:art → check:art --strict → tsc → vite build）
+        run: npm run build
+
+      - name: 冒烟静态项（体积预算 / 无外链 / 105 张图就位）
+        run: npm run smoke:static
+
+      - name: 单文件包（105 张图必须全部内联）
+        run: npm run build:single
+
+      - name: 单文件包体积记录
+        run: ls -l single/__ai_app.html
+
+      # 手机端：CI 的 ubuntu runner 自带 Chrome，但界面断言依赖字体/渲染细节，
+      # 在无头容器里结论不稳定。所以这一步是「尽力而为」：
+      #   **mobile 的结果不作为门禁，只作提示**（continue-on-error + 全部 exit 0 + ::warning::）。
+      #   通过 / 失败 / SKIP 都只在 PR 上留一条告警，不阻塞合并；
+      #   真正的手机端验收仍是人工跑 `npm run mobile`（35 项 + 11 张截图）。
+      # scripts/mobile-check.mjs 的退出码语义（脚本自己保证，CI 依赖它）：
+      #   0 = 35 项全过 / 1 = 有断言失败或 CDP 超时 / 2 = 找不到浏览器（一项都没跑）。
+      # 即使这里统一 exit 0，也绝不谎称通过：2 与 1 都会打出显式 ::warning::。
+      - name: 手机端 35 项（不作门禁，只作提示：SKIP/失败都只告警）
+        continue-on-error: true
+        run: |
+          set +e
+          npm run mobile -- --no-shots
+          code=$?
+          if [ $code -eq 2 ]; then
+            echo "::warning::mobile-check 跳过（找不到 Chrome/Edge），手机端 35 项本次未验证"
+          elif [ $code -ne 0 ]; then
+            echo "::warning::mobile-check 失败（exit $code）：CI 的无头渲染与真机不一致，请在本机人工跑 npm run mobile 复核"
+          fi
+          exit 0
